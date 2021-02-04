@@ -17,6 +17,7 @@ class CategoryController extends Controller
             $category->description = $data['description'];
             $category->url = $data['url'];
             $category->save();
+            return redirect('/admin/view-categories')->with('flash_message_success', 'Category successfully created');
         }
 
         return view('admin.categories.add_category');
@@ -26,7 +27,7 @@ class CategoryController extends Controller
         /*if ($request->isMethod('get')){
             $data = $request->all();
         }*/
-
-        return view('admin.categories.view_categories');
+        $categories = Category::get();
+        return view('admin.categories.view_categories')->with(compact('categories'));
     }
 }
