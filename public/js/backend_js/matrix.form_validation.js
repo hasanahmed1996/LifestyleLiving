@@ -54,8 +54,32 @@ $(document).ready(function(){
 		}
 	});
 
-    // Category Validation
+    // Add Category Validation
     $("#add_category").validate({
+        rules:{
+            category_name:{
+                required:true
+            },
+            description:{
+                required:true,
+            },
+            url:{
+                required:true,
+            }
+        },
+        errorClass: "help-inline",
+        errorElement: "span",
+        highlight:function(element, errorClass, validClass) {
+            $(element).parents('.control-group').addClass('error');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).parents('.control-group').removeClass('error');
+            $(element).parents('.control-group').addClass('success');
+        }
+    });
+
+    // Edit Category Validation
+    $("#edit_category").validate({
         rules:{
             category_name:{
                 required:true
@@ -133,4 +157,14 @@ $(document).ready(function(){
 			$(element).parents('.control-group').addClass('success');
 		}
 	});
+
+	$("#delCat").click(function () {
+	    //this is only be called if the delete button is clicked
+        //otherwise it will return nothing as this JS is not called.
+        if (confirm('Are you sure you want to delete this record?')){
+            return true;
+        }
+        return false;
+    });
+
 });

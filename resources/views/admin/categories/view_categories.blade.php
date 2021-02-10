@@ -3,7 +3,7 @@
 
     <div id="content">
         <div id="content-header">
-            <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Categories</a>
+            <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{url('/admin/view-categories')}}">Categories</a>
                 <a href="#" class="current">View Categories</a> </div>
             <br><h1>Categories</h1>
             @if(Session::has('flash_message_error'))
@@ -36,6 +36,7 @@
                                     <th>Parent ID</th>
                                     <th>Category name</th>
                                     <th>Category URL</th>
+                                    <th>Description</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
@@ -46,8 +47,9 @@
                                     <td>{{$category->parent_id}}</td>
                                     <td>{{$category->name}}</td>
                                     <td>{{$category->url}}</td>
-                                    <td class="center"><a href="#" class="btn btn-primary btn-mini">Edit</a>
-                                        <a href="#" class="btn btn-danger btn-mini">Delete</a></td>
+                                    <td>{{$category->description}}</td>
+                                    <td class="center"><a href="{{url('/admin/edit-category/'.$category->id)}}" class="btn btn-primary btn-mini">Edit</a>
+                                        <a id="delCat" href="{{url('/admin/delete-category/'.$category->id)}}" class="btn btn-danger btn-mini">Delete</a></td>
                                 </tr>
                                 @endforeach
                                 </tbody>
