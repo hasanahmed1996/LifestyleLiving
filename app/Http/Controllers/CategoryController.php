@@ -14,6 +14,7 @@ class CategoryController extends Controller
             //echo "<pre>"; print_r($data); die;
             $category = new Category();
             $category->name = $data['category_name'];
+            $category->parent_id = $data['parent_id'];
             $category->description = $data['description'];
             $category->url = $data['url'];
             $category->save();
@@ -22,7 +23,7 @@ class CategoryController extends Controller
 
         //This variable contains all the categories that have a parent id of 0 (The Main Categories)
         $levels = Category::where(['parent_id'=> 0])->get();
-        
+
         return view('admin.categories.add_category')->with(compact('levels'));
     }
 
@@ -39,8 +40,10 @@ class CategoryController extends Controller
         }
 
         $categoryDetails = Category::where(['id' => $id])->first();
+        //This variable contains all the categories that have a parent id of 0 (The Main Categories)
+        $levels = Category::where(['parent_id'=> 0])->get();
 
-        return view('admin.categories.edit_category')->with(compact('categoryDetails'));
+        return view('admin.categories.edit_category')->with(compact('categoryDetails','levels'));
     }
 
     public function deleteCategory($id = null){

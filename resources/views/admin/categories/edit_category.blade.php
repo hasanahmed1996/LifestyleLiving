@@ -23,6 +23,26 @@
                                         <input type="text" name="category_name" id="category_name" value="{{$categoryDetails->name}}">
                                     </div>
                                 </div>
+
+                                <div class="control-group">
+                                    <label class="control-label">Category level: </label>
+                                    <div class="controls">
+
+                                        <select name="parent_id" style="width: 220px;">
+                                            <option value="0">What is this product types category?</option>
+                                            //This foreach statement will return all the categories
+                                            //with a parent id of 0
+                                            //which is set in the $levels variable created in the add category function
+                                            @foreach($levels as $val)
+                                                <option value="{{$val->id}}" @if($val->id == $categoryDetails-> parent_id)
+                                                selected @endif>{{$val -> name}}</option>
+                                            @endforeach
+                                            //it will then return the name associated to the parent id,
+                                            //within the dropdown selectable list.
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div class="control-group">
                                     <label class="control-label">Description: </label>
                                     <div class="controls">
